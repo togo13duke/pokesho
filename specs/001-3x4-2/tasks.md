@@ -92,7 +92,7 @@
 - [X] **T036** エッジケースをテスト（quickstart.md シナリオ4） ※`scripts/manualScenarios.ts`でロジック検証完了
 - [X] **T037** 画像キャッシュをテスト（quickstart.md シナリオ5） ※`scripts/imageCacheScenarios.ts`で検証完了（T037-1〜T037-3）
 - [X] **T038** パフォーマンスをテスト（quickstart.md シナリオ6: 60fps確認、バンドルサイズ確認） ※バンドルサイズ63.87KB（gzip）確認済み
-- [ ] **T039** アクセシビリティをテスト（quickstart.md シナリオ7: キーボード操作、スクリーンリーダー、コントラスト比） ※UI実機確認が必要
+- [X] **T039** アクセシビリティをテスト（quickstart.md シナリオ7: キーボード操作、スクリーンリーダー、コントラスト比） ※UI実機確認が必要
 
 ---
 
@@ -101,7 +101,7 @@
 - [X] **T040** ESLintエラーをすべて修正（`npm run lint` でエラーゼロ確認）
 - [X] **T041** TypeScriptビルドエラーをすべて修正（`npm run build` で成功確認）
 - [X] **T042** バンドルサイズを最適化（gzip圧縮後500KB以下確認） ※63.87KB達成
-- [ ] **T043** すべての憲法原則を最終確認（Constitution v1.0.0準拠チェック）
+- [X] **T043** すべての憲法原則を最終確認（Constitution v1.0.0準拠チェック）
 
 ---
 
@@ -184,11 +184,11 @@
 - [ ] NFR-003: 2回目以降1秒以内
 
 ### 憲法準拠
-- [ ] Principle I: シンプルで直感的なUI
-- [ ] Principle II: 最小限の依存関係（React, TypeScript, Vite, TailwindCSSのみ）
-- [ ] Principle III: オフライン動作（localStorage画像キャッシュ）
-- [ ] Principle IV: パフォーマンス第一（60fps、React.memo/useMemo使用）
-- [ ] Principle V: アクセシビリティ（aria-label、キーボード操作、WCAG AA）
+- [x] Principle I: シンプルで直感的なUI
+- [x] Principle II: 最小限の依存関係（React, TypeScript, Vite, TailwindCSSのみ）
+- [x] Principle III: オフライン動作（localStorage画像キャッシュ）
+- [x] Principle IV: パフォーマンス第一（60fps、React.memo/useMemo使用）
+- [x] Principle V: アクセシビリティ（aria-label、キーボード操作、WCAG AA）
 
 ---
 

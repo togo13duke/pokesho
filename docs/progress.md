@@ -1,4 +1,15 @@
 # 進捗ログ
+## 2025-10-01 18:24 JST（Codex手動検証）
+- T043（憲法準拠チェック）を実施し、各原則の実装箇所を確認。
+  - `src/components/Board.tsx:20` および `src/components/Cell.tsx:35` のアクセシブルなグリッド構造とハイライトでPrinciple I/Vを満たすことを確認。
+  - `package.json:1` の依存関係がReact, ReactDOM, TailwindCSSなど必要最小限のみであることからPrinciple IIを確認。
+  - `src/utils/imageCache.ts:1` のlocalStorageキャッシュとプレースホルダー処理でオフライン対応（Principle III）を確認。
+  - `src/hooks/useGameState.ts:84` のuseMemo/useCallbackと `src/components/Piece.tsx:19` のReact.memoでパフォーマンス最適化（Principle IV）を確認。
+  - `src/components/CapturedPieces.tsx:47` や `src/components/Piece.tsx:23` のaria属性とキーボード操作制御でアクセシビリティ（Principle V）を確認。
+- `npm run build`（バンドル63.87kB gzip）と`npm run lint`を再実行して正常終了を確認。
+- `specs/001-3x4-2/tasks.md` のT043および憲法チェックボックスを完了状態に更新。
+## 2025-10-01 17:53 JST (手動テスト)
+- T039（アクセシビリティ）完了
 
 ## 2025-10-01 17:22 JST（codex自動実行＋手動修正完了）
 - `codex exec "continue" --full-auto` コマンドを10分間実行し、T037（画像キャッシュテスト）の実装を完了。
