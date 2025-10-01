@@ -8,6 +8,11 @@ const PIECE_NAMES: Record<PieceData['type'], string> = {
   squirtle: 'ゼニガメ',
   charmander: 'ヒトカゲ',
   charizard: 'リザードン',
+  terapagos: 'テラパゴス',
+  sprigatito: 'ニャオハ',
+  quaxly: 'クワッス',
+  fuecoco: 'ホゲータ',
+  skeledirge: 'ラウドボーン',
 }
 
 const OWNER_LABEL: Record<PieceData['owner'], string> = {
@@ -39,4 +44,3 @@ export const Piece = memo(({ piece }: PieceProps) => {
 })
 
 Piece.displayName = 'Piece'
-

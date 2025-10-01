@@ -4,6 +4,7 @@ import type { Board, CapturedPieces, GameState, GameStatus, Position } from '../
 import type { Piece, PieceType, Player } from '../types/piece'
 import { evaluateGameStatus } from '../utils/gameLogic'
 import { createInitialGameState } from '../utils/initialBoard'
+import { convertCapturedPiece } from '../utils/pieceConversion'
 import { MOVE_RULES, type Direction } from '../utils/moveRules'
 
 interface UseGameStateResult {
@@ -68,31 +69,35 @@ function generatePieceId(owner: Player, type: PieceType): string {
 }
 
 function normalizeCapturedPiece(piece: Piece, capturer: Player): Piece {
-  const baseType: PieceType = piece.type === 'charizard' ? 'charmander' : piece.type
+  const converted = convertCapturedPiece(piece, capturer)
   return {
-    id: generatePieceId(capturer, baseType),
-    type: baseType,
-    owner: capturer,
-    isPromoted: false,
-    imageUrl: PLACEHOLDER_IMAGE_PATH,
+    ...converted,
+    id: generatePieceId(capturer, converted.type),
   }
 }
 
 function promoteIfNeeded(piece: Piece, row: number): Piece {
-  if (piece.type !== 'charmander') {
-    return piece
+  const shouldPromote = row === PROMOTION_ROW[piece.owner]
+
+  if (piece.type === 'charmander' && shouldPromote) {
+    return {
+      ...piece,
+      type: 'charizard',
+      isPromoted: true,
+      imageUrl: PLACEHOLDER_IMAGE_PATH,
+    }
   }
 
-  if (row !== PROMOTION_ROW[piece.owner]) {
-    return piece
+  if (piece.type === 'fuecoco' && shouldPromote) {
+    return {
+      ...piece,
+      type: 'skeledirge',
+      isPromoted: true,
+      imageUrl: PLACEHOLDER_IMAGE_PATH,
+    }
   }
 
-  return {
-    ...piece,
-    type: 'charizard',
-    isPromoted: true,
-    imageUrl: PLACEHOLDER_IMAGE_PATH,
-  }
+  return piece
 }
 
 function adjustDirection(direction: Direction, owner: Player): Direction {

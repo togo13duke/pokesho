@@ -7,7 +7,7 @@ function createPiece(type: PieceType, owner: Player, index: number): Piece {
     id: `${owner}-${type}-${index}`,
     type,
     owner,
-    isPromoted: type === 'charizard',
+    isPromoted: type === 'charizard' || type === 'skeledirge',
     imageUrl: PLACEHOLDER_IMAGE_PATH,
   }
 }
@@ -16,13 +16,13 @@ export function createInitialGameState(): GameState {
   return {
     board: [
       [
-        createPiece('bulbasaur', 'player2', 0),
-        createPiece('pikachu', 'player2', 0),
-        createPiece('squirtle', 'player2', 0),
+        createPiece('quaxly', 'player2', 0),
+        createPiece('terapagos', 'player2', 0),
+        createPiece('sprigatito', 'player2', 0),
       ],
       [
         null,
-        createPiece('charmander', 'player2', 0),
+        createPiece('fuecoco', 'player2', 0),
         null,
       ],
       [
