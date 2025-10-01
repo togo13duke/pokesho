@@ -23,4 +23,5 @@ History currently uses short, imperative messages (e.g., `Initial commit from Sp
 When the user says: "continue"
 1) Check the contents of `docs/progress.md`
 2) Execute `.codex/prompts/implement.md`
-3) After completion, write the progress to `docs/progress.md`
+3) After completion, write the progress to `docs/progress.md`.
+4) Update `specs/.../tasks.md` checkboxes.

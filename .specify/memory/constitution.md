@@ -1,50 +1,172 @@
-# [PROJECT_NAME] Constitution
-<!-- Example: Spec Constitution, TaskFlow Constitution, etc. -->
+<!--
+Sync Impact Report:
+- Version change: none → 1.0.0
+- New constitution created from scratch
+- Principles added:
+  1. シンプルで直感的なUI
+  2. 最小限の依存関係
+  3. ローカル優先設計
+  4. パフォーマンス第一
+  5. アクセシビリティ
+- Templates status:
+  ✅ plan-template.md - Constitution Check section will reference this file
+  ✅ spec-template.md - No changes needed (generic template)
+  ✅ tasks-template.md - No changes needed (generic template)
+- Follow-up TODOs: None
+-->
+
+# ポケモン将棋 Constitution
 
 ## Core Principles
 
-### [PRINCIPLE_1_NAME]
-<!-- Example: I. Library-First -->
-[PRINCIPLE_1_DESCRIPTION]
-<!-- Example: Every feature starts as a standalone library; Libraries must be self-contained, independently testable, documented; Clear purpose required - no organizational-only libraries -->
+### I. シンプルで直感的なUI
 
-### [PRINCIPLE_2_NAME]
-<!-- Example: II. CLI Interface -->
-[PRINCIPLE_2_DESCRIPTION]
-<!-- Example: Every library exposes functionality via CLI; Text in/out protocol: stdin/args → stdout, errors → stderr; Support JSON + human-readable formats -->
+**NON-NEGOTIABLE**: すべての機能は子供から大人まで直感的に理解できること。
 
-### [PRINCIPLE_3_NAME]
-<!-- Example: III. Test-First (NON-NEGOTIABLE) -->
-[PRINCIPLE_3_DESCRIPTION]
-<!-- Example: TDD mandatory: Tests written → User approved → Tests fail → Then implement; Red-Green-Refactor cycle strictly enforced -->
+- ワンクリック操作で駒を移動できること
+- 移動可能なマスは視覚的にハイライト表示すること
+- 現在のターンを明示的に表示すること
+- 勝敗判定後は分かりやすいメッセージを表示すること
+- 複雑な操作フローや多段階の確認は避けること
 
-### [PRINCIPLE_4_NAME]
-<!-- Example: IV. Integration Testing -->
-[PRINCIPLE_4_DESCRIPTION]
-<!-- Example: Focus areas requiring integration tests: New library contract tests, Contract changes, Inter-service communication, Shared schemas -->
+**Rationale**: どうぶつしょうぎのシンプルさを保ち、ポケモンファンの子供たちが迷わず楽しめるゲーム体験を提供する。
 
-### [PRINCIPLE_5_NAME]
-<!-- Example: V. Observability, VI. Versioning & Breaking Changes, VII. Simplicity -->
-[PRINCIPLE_5_DESCRIPTION]
-<!-- Example: Text I/O ensures debuggability; Structured logging required; Or: MAJOR.MINOR.BUILD format; Or: Start simple, YAGNI principles -->
+### II. 最小限の依存関係
 
-## [SECTION_2_NAME]
-<!-- Example: Additional Constraints, Security Requirements, Performance Standards, etc. -->
+プロジェクトは必要最小限のライブラリのみを使用すること。
 
-[SECTION_2_CONTENT]
-<!-- Example: Technology stack requirements, compliance standards, deployment policies, etc. -->
+- コア依存: React, TypeScript, Vite のみ
+- UI依存: TailwindCSS のみ
+- 新しいライブラリ追加前に、標準機能で実現可能か検討すること
+- 状態管理は React Hooks を優先し、複雑化した場合のみ Zustand を検討
+- 外部APIライブラリは不要（fetch API使用）
 
-## [SECTION_3_NAME]
-<!-- Example: Development Workflow, Review Process, Quality Gates, etc. -->
+**Rationale**: ビルドサイズを小さく保ち、メンテナンスコストを最小化し、高速な起動とパフォーマンスを実現する。
 
-[SECTION_3_CONTENT]
-<!-- Example: Code review requirements, testing gates, deployment approval process, etc. -->
+### III. ローカル優先設計
+
+**NON-NEGOTIABLE**: ゲームは完全にオフラインで動作すること。
+
+- 初回アクセス時のみ PokeAPI からポケモン画像を取得
+- 取得した画像は localStorage または IndexedDB にキャッシュ
+- 2回目以降はキャッシュから読み込み、ネットワーク不要
+- ゲームロジックはすべてクライアントサイドで完結
+- サーバーサイド処理は一切行わない
+
+**Rationale**: インターネット環境に依存せず、どこでも遊べるゲームを提供する。レイテンシーゼロの快適な体験を実現する。
+
+### IV. パフォーマンス第一
+
+すべての操作は即座にレスポンスすること。
+
+- 駒の移動は 16ms 以内（60fps）でレンダリング
+- 画像のキャッシュヒット時は即座に表示
+- 不要な再レンダリングを避けるため React.memo や useMemo を活用
+- 盤面状態の更新は最小限の範囲に留める
+- 開発者ツールで Performance プロファイリングを定期的に実施
+
+**Rationale**: 小さな子供たちの注意を保つため、待ち時間ゼロの滑らかな操作感が必須。
+
+### V. アクセシビリティ
+
+すべてのユーザーが楽しめる設計を心がけること。
+
+- 駒や盤面には適切な alt テキストや aria-label を付与
+- キーボード操作でもゲームをプレイ可能にする
+- 色覚異常を考慮したカラーコントラストを確保（移動可能マスのハイライトなど）
+- フォントサイズは十分に大きく、読みやすいフォントを使用
+- タッチデバイスでも快適に操作できるタップ領域を確保
+
+**Rationale**: 幅広いユーザーに楽しんでもらうため、アクセシビリティは後回しにせず最初から組み込む。
+
+## 技術制約
+
+### 必須技術スタック
+
+- **Frontend**: React 19 + TypeScript
+- **Build Tool**: Vite 7
+- **Styling**: TailwindCSS
+- **Image Source**: PokeAPI (https://pokeapi.co/)
+- **Storage**: localStorage または IndexedDB
+- **Hosting**: Cloudflare Pages
+
+### 禁止事項
+
+- サーバーサイドロジックの実装（完全にクライアントサイドで完結）
+- バックエンドAPI の構築
+- データベースの使用
+- 外部認証サービスの統合
+- 重い UI フレームワークやコンポーネントライブラリの導入
+
+### パフォーマンス基準
+
+- **初回ロード**: 5秒以内（画像キャッシュ前）
+- **2回目以降のロード**: 1秒以内（キャッシュヒット）
+- **駒の移動レスポンス**: 16ms以内（60fps）
+- **バンドルサイズ**: 500KB以下（gzip圧縮後）
+
+## 開発ワークフロー
+
+### フェーズ分け
+
+**Phase 1: 基本機能**
+1. 画像キャッシュシステム
+2. 盤面表示と初期配置
+3. ターン管理・表示
+4. 駒の移動ロジック
+5. キャッチ機能
+6. 勝敗判定
+
+**Phase 2: 拡張機能**
+7. 成り（進化）システム
+8. 打つ機能
+9. 手駒表示エリア
+10. UIブラッシュアップ
+
+### スコープ外機能
+
+以下の機能は MVP では実装しない:
+
+- 待った機能
+- 棋譜の保存/再生
+- CPU対戦
+- 千日手判定
+- オンライン対戦
+- ユーザー認証
+
+### コードレビュー基準
+
+- すべての PR は TypeScript の型チェックに合格すること（`npm run build` が成功）
+- ESLint エラーがゼロであること
+- 新機能は Phase 1/Phase 2 の優先順位に従うこと
+- パフォーマンス基準を満たすことを確認
+- アクセシビリティチェックリストを通過すること
 
 ## Governance
-<!-- Example: Constitution supersedes all other practices; Amendments require documentation, approval, migration plan -->
 
-[GOVERNANCE_RULES]
-<!-- Example: All PRs/reviews must verify compliance; Complexity must be justified; Use [GUIDANCE_FILE] for runtime development guidance -->
+### 憲法の優先順位
 
-**Version**: [CONSTITUTION_VERSION] | **Ratified**: [RATIFICATION_DATE] | **Last Amended**: [LAST_AMENDED_DATE]
-<!-- Example: Version: 2.1.1 | Ratified: 2025-06-13 | Last Amended: 2025-07-16 -->
+この憲法はすべての開発プラクティスに優先する。原則に違反する実装は、明確な理由と代替案の検討なしには許可されない。
+
+### 修正手続き
+
+1. 修正提案は Issue で議論
+2. 修正内容を文書化
+3. 影響範囲を評価（既存実装への影響）
+4. バージョン番号を更新（セマンティックバージョニング）
+5. 関連テンプレートファイルを同期
+
+### コンプライアンス
+
+- すべての実装は Phase 0 の research.md で憲法チェックを実施
+- Phase 1 の設計完了後に再度憲法チェックを実施
+- 違反が見つかった場合は Complexity Tracking セクションで正当化
+- 正当化できない場合は設計を簡素化
+
+### エージェントガイダンス
+
+- Claude Code: `CLAUDE.md` にプロジェクト固有の実行ガイダンスを記載
+- 日本語でのコミュニケーション必須
+- 作成ドキュメントも日本語で記述
+
+**Version**: 1.0.0 | **Ratified**: 2025-10-01 | **Last Amended**: 2025-10-01
