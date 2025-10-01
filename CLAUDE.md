@@ -114,7 +114,7 @@ Both stages must succeed for a successful build.
 
 ## Development Workflow
 
-When the user says: "continue"
+When the user says: "continue implementing"
 1) Check the contents of `docs/progress.md`
 2) Execute `.claude/commands/implement.md`
 3) After completion, write the progress to `docs/progress.md`
