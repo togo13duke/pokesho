@@ -36,10 +36,10 @@ function App() {
     <main className="min-h-screen bg-gradient-to-br from-sky-50 via-slate-50 to-amber-50 px-4 py-8 text-slate-900">
       <div className="mx-auto flex w-full max-w-6xl flex-col gap-8">
         <header className="flex flex-col items-center gap-4 text-center">
-          <h1 className="text-4xl font-extrabold text-slate-800">ポケモン将棋</h1>
+          <h1 className="text-4xl font-extrabold text-slate-800">pokesho ポケモン将棋</h1>
           <p className="max-w-prose text-base text-slate-600">
-            PokeAPIの画像を使った3×4のポケモン将棋。駒をクリックして移動し、相手のピカチュウを捕まえるか、
-            自分のピカチュウでトライを成功させましょう。
+            PokeAPIの画像を使った3×4のポケモン将棋。駒をクリックして移動し、相手の王様（ピカチュウ or テラパゴス）を捕まえるか、
+            自分の王様（ピカチュウ or テラパゴス）でトライを成功させましょう。
           </p>
           <TurnDisplay currentTurn={currentTurn} />
         </header>
@@ -50,6 +50,7 @@ function App() {
               board={board}
               highlightPositions={highlightPositions}
               selectedPosition={selectedBoardPiece}
+              currentTurn={currentTurn}
               onCellSelect={handleCellClick}
             />
             {gameStatus !== 'playing' ? (
@@ -78,7 +79,6 @@ function App() {
               <ul className="mt-2 space-y-2 text-sm text-slate-600">
                 <li>駒をクリックして移動先をハイライト表示。</li>
                 <li>手駒をクリックして空きマスにドロップ。</li>
-                <li>Enter / Spaceで移動、Escapeで選択解除。</li>
               </ul>
             </div>
           </aside>

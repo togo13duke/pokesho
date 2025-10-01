@@ -1,5 +1,18 @@
 import type { Piece, Player } from './piece'
 
+/**
+ * プレイヤーに対応する表示色（TailwindCSSクラス名）
+ */
+export type PlayerColor = 'bg-blue-50' | 'bg-red-50'
+
+/**
+ * プレイヤーから表示色へのマッピング
+ */
+export const PLAYER_COLORS: Record<Player, PlayerColor> = {
+  player1: 'bg-blue-50',
+  player2: 'bg-red-50',
+}
+
 export interface Position {
   row: number
   col: number

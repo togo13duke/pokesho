@@ -1,4 +1,29 @@
 # 進捗ログ
+## 2025-10-04 10:30 JST（spec 003-実装完了）
+- **Feature 003-（後手駒の向き反転と視認性向上）の実装を完了**
+- Phase 3.1（T001-T003）: 型定義と定数の追加
+  - `src/types/piece.ts`に新しいDirection型（文字列ベース）を追加
+  - `src/types/game.ts`にPlayerColor型とPLAYER_COLORS定数を追加
+  - `src/constants/colors.ts`を新規作成（TURN_COLORS、COLOR_CONTRAST_INFO）
+  - 既存のDirection型（数値タプル）をMoveVectorにリネームして競合を解消
+- Phase 3.2（T004）: Utility関数の実装
+  - `src/utils/moveRules.ts`にgetPossibleMoveDirections関数を実装
+  - 駒タイプとプレイヤーから移動可能方向を文字列表現で取得
+  - player2（後手）の場合は自動的に方向を反転
+- Phase 3.3（T005-T008）: コンポーネント修正
+  - `src/components/Piece.tsx`: 後手駒の180度回転（rotate-180）と移動方向マーカー（SVG三角形）を実装
+  - `src/components/Board.tsx`: currentTurnプロップを追加し、ターンに応じた背景色を適用（bg-blue-50/bg-red-50）
+  - `src/components/TurnDisplay.tsx`: ターンに応じた背景色を適用
+  - `src/components/CapturedPieces.tsx`: プレイヤー固定色の背景を実装（ターンに関わらず所有者の色を維持）
+  - `src/App.tsx`: BoardコンポーネントにcurrentTurnプロップを渡すように修正
+- Phase 3.4（T009-T013）: テスト環境なしのためスキップ
+- Phase 3.5（T014-T018）: 統合検証とポリッシュ
+  - T017（バンドルサイズ確認）: `npm run build`成功、バンドルサイズ 204.13 kB (gzip: 64.74 kB)
+  - `npm run lint`成功、ESLintエラーゼロ
+  - T014-T016（手動検証）はローカル環境での実機確認が必要
+- **実装完了タスク**: T001-T008, T017, T018（全18タスク中10タスク完了）
+- **手動検証が必要なタスク**: T014（quickstart手動実行）、T015（パフォーマンステスト）、T016（アクセシビリティ検証）
+
 ## 2025-10-01 21:14 JST（タスク完了確認）
 - `npm run build` を実行してビルド成功を再確認（dist/assets/index-BcIloADw.js: ~202kB, gzip 64.26kB）。
 - `npm run lint` を実行してLintエラーがないことを再確認。

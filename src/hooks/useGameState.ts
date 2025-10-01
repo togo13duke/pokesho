@@ -5,7 +5,7 @@ import type { Piece, PieceType, Player } from '../types/piece'
 import { evaluateGameStatus } from '../utils/gameLogic'
 import { createInitialGameState } from '../utils/initialBoard'
 import { convertCapturedPiece } from '../utils/pieceConversion'
-import { MOVE_RULES, type Direction } from '../utils/moveRules'
+import { MOVE_RULES, type MoveVector } from '../utils/moveRules'
 
 interface UseGameStateResult {
   board: Board
@@ -100,7 +100,7 @@ function promoteIfNeeded(piece: Piece, row: number): Piece {
   return piece
 }
 
-function adjustDirection(direction: Direction, owner: Player): Direction {
+function adjustDirection(direction: MoveVector, owner: Player): MoveVector {
   const multiplier = directionMultiplierByPlayer[owner]
   return [direction[0] * multiplier, direction[1]]
 }
