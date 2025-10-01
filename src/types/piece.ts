@@ -1,6 +1,22 @@
-export type PieceType = 'pikachu' | 'bulbasaur' | 'squirtle' | 'charmander' | 'charizard'
+export type PieceType =
+  | 'pikachu'
+  | 'bulbasaur'
+  | 'squirtle'
+  | 'charmander'
+  | 'charizard'
+  | 'terapagos'
+  | 'sprigatito'
+  | 'quaxly'
+  | 'fuecoco'
+  | 'skeledirge'
 
 export type Player = 'player1' | 'player2'
+
+export type Role = 'king' | 'elephant' | 'giraffe' | 'chick' | 'hen'
+
+export type RoleToPieceMap = Record<Player, Record<Role, PieceType>>
+
+export type PieceToRoleMap = Record<PieceType, Role>
 
 export interface Piece {
   id: string

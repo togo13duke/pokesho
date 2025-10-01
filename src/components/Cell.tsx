@@ -14,6 +14,11 @@ const PIECE_NAMES: Record<PieceData['type'], string> = {
   squirtle: 'ゼニガメ',
   charmander: 'ヒトカゲ',
   charizard: 'リザードン',
+  terapagos: 'テラパゴス',
+  sprigatito: 'ニャオハ',
+  quaxly: 'クワッス',
+  fuecoco: 'ホゲータ',
+  skeledirge: 'ラウドボーン',
 }
 
 interface CellProps {
@@ -64,4 +69,3 @@ export function Cell({ position, piece, isHighlighted, isSelected, onSelect, tab
     </button>
   )
 }
-
