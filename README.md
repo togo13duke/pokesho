@@ -17,6 +17,9 @@
 
 - ✅ 3×4マスの盤面で2人対戦
 - ✅ 移動可能マスのハイライト表示
+- ✅ 後手駒の180度回転表示（視認性向上）
+- ✅ 各駒に移動可能方向マーカー表示
+- ✅ ターン別の盤面背景色変更（先手：青系、後手：赤系）
 - ✅ 手駒システム（取った駒を盤上に配置）
 - ✅ 進化システム（ヒトカゲ→リザードン、ホゲータ→ラウドボーン）
 - ✅ ターン表示（先手の番/後手の番）
@@ -36,6 +39,8 @@
 
 ## 🚀 クイックスタート
 
+[すぐ遊ぶ](https://pokesho.duke13.com)
+
 ### 必要環境
 
 - Node.js 18以上
@@ -45,7 +50,7 @@
 
 ```bash
 # リポジトリをクローン
-git clone https://github.com/yourusername/pokesho.git
+git clone https://github.com/togo13duke/pokesho.git
 cd pokesho
 
 # 依存関係をインストール
@@ -81,11 +86,11 @@ npm run lint
 ```
 pokesho/
 ├── src/
+│   ├── App.tsx           # メインアプリケーション
 │   ├── components/       # UIコンポーネント
-│   │   ├── App.tsx       # ルートコンポーネント
-│   │   ├── Board.tsx     # 盤面表示
+│   │   ├── Board.tsx     # 盤面表示（ターン別背景色）
 │   │   ├── Cell.tsx      # マス目
-│   │   ├── Piece.tsx     # 駒表示
+│   │   ├── Piece.tsx     # 駒表示（回転＋方向マーカー）
 │   │   ├── CapturedPieces.tsx  # 手駒表示
 │   │   ├── TurnDisplay.tsx     # ターン表示
 │   │   └── GameOverMessage.tsx # 勝敗メッセージ
@@ -94,18 +99,20 @@ pokesho/
 │   │   └── useImageCache.ts    # 画像キャッシュ
 │   ├── utils/            # ゲームロジック
 │   │   ├── gameLogic.ts        # 勝敗判定
-│   │   ├── moveRules.ts        # 移動ルール
+│   │   ├── moveRules.ts        # 移動ルール＋方向取得
 │   │   ├── initialBoard.ts     # 初期配置
 │   │   ├── pieceConversion.ts  # 駒変換（手駒→盤上）
 │   │   └── imageCache.ts       # 画像取得
 │   ├── types/            # 型定義
-│   │   ├── game.ts       # GameState, Position等
-│   │   └── piece.ts      # PieceType, Player, Role等
+│   │   ├── game.ts       # GameState, Position, PlayerColor等
+│   │   └── piece.ts      # PieceType, Player, Role, Direction等
 │   └── constants/        # 定数
-│       └── pokemon.ts    # ポケモンID、画像URL等
+│       ├── pokemon.ts    # ポケモンID、画像URL等
+│       └── colors.ts     # ターン別カラー定数
 ├── specs/                # 仕様書
 │   ├── 001-3x4-2/        # spec 001: 初期実装
-│   └── 002-/             # spec 002: 後手駒セット変更
+│   ├── 002-/             # spec 002: 後手駒セット変更
+│   └── 003-/             # spec 003: 駒回転＋視認性向上
 ├── docs/                 # ドキュメント
 │   ├── progress.md       # 実装進捗ログ
 │   └── steering/         # プロダクト設計
@@ -120,7 +127,9 @@ pokesho/
 - **[spec 001-3x4-2](./specs/001-3x4-2/spec.md)**: ポケモン将棋の初期実装
   - 3×4盤面、駒移動、手駒システム、進化、勝敗判定
 - **[spec 002-](./specs/002-/spec.md)**: 後手駒セット変更と初期配置左右反転
-  - 後手に第9世代御三家を導入、視覚的区別の向上
+  - 後手に第9世代御三家（テラパゴス、ニャオハ、クワッス、ホゲータ）を導入
+- **[spec 003-](./specs/003-/spec.md)**: 後手駒の向き反転と視認性向上
+  - 後手駒180度回転、移動方向マーカー表示、ターン別背景色
 
 詳細な実装計画は各仕様書の `plan.md`、進捗状況は `tasks.md` を参照してください。
 
