@@ -1,6 +1,6 @@
 import { createInitialGameState } from '../src/utils/initialBoard'
 import { evaluateGameStatus } from '../src/utils/gameLogic'
-import { MOVE_RULES, type Direction } from '../src/utils/moveRules'
+import { MOVE_RULES, type MoveVector } from '../src/utils/moveRules'
 import type { Board, CapturedPieces, GameState, Position } from '../src/types/game'
 import type { Piece, PieceType, Player } from '../src/types/piece'
 
@@ -58,7 +58,7 @@ function cloneCapturedPieces(captured: CapturedPieces): CapturedPieces {
   }
 }
 
-function adjustDirection(direction: Direction, owner: Player): Direction {
+function adjustDirection(direction: MoveVector, owner: Player): MoveVector {
   const multiplier = directionMultiplierByPlayer[owner]
   return [direction[0] * multiplier, direction[1]]
 }

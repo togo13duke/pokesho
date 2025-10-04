@@ -1,5 +1,6 @@
 import type { CapturedPieces as CapturedPiecesState } from '../types/game'
 import type { Piece as PieceData, Player } from '../types/piece'
+import { PLAYER_COLORS } from '../types/game'
 import { Piece } from './Piece'
 
 const PLAYER_LABEL: Record<Player, string> = {
@@ -43,8 +44,10 @@ function HandSection({
   hasEmptyCell: boolean
   onSelect: (pieceId: string) => void
 }) {
+  const backgroundColorClass = PLAYER_COLORS[owner]
+
   return (
-    <section className="flex flex-1 flex-col gap-2 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+    <section className={`flex flex-1 flex-col gap-2 rounded-2xl border border-slate-200 p-4 shadow-sm ${backgroundColorClass}`}>
       <h2 className="text-center text-lg font-semibold text-slate-700">{PLAYER_LABEL[owner]}の手駒</h2>
       <div className="grid grid-cols-2 gap-3 md:grid-cols-3">
         {pieces.length === 0 ? (

@@ -50,6 +50,7 @@ function App() {
               board={board}
               highlightPositions={highlightPositions}
               selectedPosition={selectedBoardPiece}
+              currentTurn={currentTurn}
               onCellSelect={handleCellClick}
             />
             {gameStatus !== 'playing' ? (
